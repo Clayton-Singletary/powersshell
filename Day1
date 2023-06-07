@@ -30,3 +30,4 @@ $b = 100 **you ned the dollar sign when you assign but not when you call the var
 get-variable a
 > a     10
 $a, $b, $c = 5, 6, 4 **you can assign multiple variables at once**
+**get-process | sort -Property starttime | select-object -skip 1 -first 1 -last 1 | format-table name, starttime**
