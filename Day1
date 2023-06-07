@@ -1,0 +1,32 @@
+xfreerdp /u:student /v:10.50.37.76 /dynamic-resolution +glyph-cache  +clipboard <how to get into windows box>
+
+get-command -options ** get command info via all commands verbs or nouns**
+cls **clear screen**
+
+get-eventlog -logname security
+
+-----------------------------------------------------------------------------------------------------------------
+help system
+get **do first**
+get-help <commandlet> -full **-showwindow for gui page**
+get-help -examples <commandlet>
+or
+micrsoft documentation
+-----------------------------------------------------------------------------------------------------------------
+ps **gets pid,name,handles of processes** same as get-process
+get-childitem -filter **.exe -path C:\windows -recurse -name **example of how to find .exe**
+-----------------------------------------------------------------------------------------------------------------
+get-alias -definition <cmdlet>
+-----------------------------------------------------------------------------------------------------------------
+get-host **shows powershell version**
+(get-process).processname **example of dot method to get properties ie: the name || use format-table**
+(get-process notepad).kill() **example of dot method with kill command**
+get-process | get-member **tells you what properties you can get for an object**
+get-service | format-table name, status **gets services and formats a table on the name and status of the service**
+-----------------------------------------------------------------------------------------------------------------
+defining variables
+$a = 10
+$b = 100 **you ned the dollar sign when you assign but not when you call the variable**
+get-variable a
+> a     10
+$a, $b, $c = 5, 6, 4 **you can assign multiple variables at once**
