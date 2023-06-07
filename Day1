@@ -26,7 +26,7 @@ get-service | format-table name, status **gets services and formats a table on t
 -----------------------------------------------------------------------------------------------------------------
 defining variables
 $a = 10
-$b = 100 **you ned the dollar sign when you assign but not when you call the variable**
+$b = 100 **you need the dollar sign when you assign but not when you call the variable**
 get-variable a
 > a     10
 $a, $b, $c = 5, 6, 4 **you can assign multiple variables at once**
