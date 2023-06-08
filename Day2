@@ -1,3 +1,101 @@
 (get-process).gettype() **shows its data type...normally an array**
 $list[0] **to reference an index of an array**
 $list.count **gives the amount of items in an array**
+
+jagged array:
+$jarray = "joe", "jim", "jan",(1,('apple, 'pear,), 3), "jay" **makes jagged array**
+$a = 1, 2, 3, 4, 5, 6
+$a += , @(7,8,9)
+$jarray[3][1][1] **produces pear**
+
+$TargetingArray= @(
+(35.7219, 51.3347, "Tehran"),
+(39.9042, 116.4074, "Bejing"),
+(39.0738, 125.8198, "Pyongyang"),
+(33.5138, 36.2765, "Demascus")
+)
+$TargetingArray[0] **shows first array in the array ie. first set of ()**
+
+for each ($line in $TargetingArray)  **writes line of array that contains Bejing**
+{
+  if ($line[-1] -eq 'Bejing')
+  {
+    write-output $line
+  }
+}
+
+-------------------------------------------------------------------------------------------------------------------
+
+scriptblock:
+$myblock = { get-service | ft name, status } **makes it**
+& $myblock **calls it**
+
+$a = 1      **more examples with variable and scriptblock**
+$b = { 1 + 1 }
+$a += &$b
+
+-------------------------------------------------------------------------------------------------------------------
+
+sorting and grouping:
+get-childitem | sort -decending
+gci | sort -property length -decending
+get-service | group-object status
+get-childitem | group-object {$_.length -lt 1kb} ***pipe line variable this is just saying whatever is being 
+    passed threw the pipeline***
+1,3,5,8,2,10 | sort **sorts items passed to sort****sorts numerically**
+"1","3","5","8","2","10" | sort **sorts as string****can also use single quotes**
+1..10 | sort -property { get-random } **sorts randomly**
+
+get-process | select-object -first 10 **gets the first 10 processes**
+
+get-process | ft name, id **works but**
+get-process | select-object name, id **more prefered**
+
+Get-Service | Where-Object {$_.status -eq 'running'} **getting all running services**
+
+Get-ChildItem *.txt | Where-Object {$_.length -lt 100}
+
+Get-Process | where {$_. -like "*powershell*"} | ft name, description
+
+1,2,3,1,2,3,1,2,3 | sort | get-unique **sorts and only prints each uniq value once**
+
+Get-ChildItem | Measure-Object -property length **counts the amount of files in current working directory
+or
+gci | measure length
+
+Get-ChildItem | Measure-Object -property length -average -maximum -minimum -sum
+
+'i bet yall cant wait to graduate' > test.txt   **comparing**
+$before = Get-ChildItem
+'4' > test.txt
+$after = gci
+Compare-Object $before $after -Property length, name
+
+------------------------------------------------------------------------------------------------------------------
+
+objects:
+$mytruck = New-Object object
+add-member -membertype NoteProperty -Name Color -Value Black -InputObject $mytruck
+$mytruck.color
+> Black
+Add-Member -me NoteProperty -in $mytruck -na Make -va Ford
+$mytruck.Make
+> Ford
+$mytruck | Add-Member NoteProperty -Name Model -value F150
+$mytruck.Model
+> F150
+Add-Member -membertype ScriptMethod -in $mytruck -name Drive -value { "Going on a roadtrip" }
+$mytruck.drive()
+> Going on a roadtrip
+$mytruck | Add-Member ScriptMethod -name Park -Value { "finding a spot" }
+$mytruck.park()
+> finding a spot
+
+$soldier = [PSCustomObject]@{
+    "firstname" = "joe" 
+    "lastname" = "snuffy"
+    "rank" = "ssg"
+    "mos" = "17c"
+    "position" = "host analyst" 
+}
+$soldier
