@@ -62,7 +62,7 @@ Get-Process | where {$_. -like "*powershell*"} | ft name, description
 Get-ChildItem | Measure-Object -property length **counts the amount of files in current working directory
 or
 gci | measure length
-
+()
 Get-ChildItem | Measure-Object -property length -average -maximum -minimum -sum
 
 'i bet yall cant wait to graduate' > test.txt   **comparing**
@@ -99,3 +99,163 @@ $soldier = [PSCustomObject]@{
     "position" = "host analyst" 
 }
 $soldier
+
+------------------------------------------------------------------------------------------------------------------
+
+Hash Tables: Examples/Practice
+
+$employee1 = @{
+    First = 'Mary'; 
+    Last = 'Hopper'; 
+    Id = '001';
+    Job = 'Software Developer'}
+$employee2 = @{
+    First = 'John';
+    Last = 'Williams';
+    Id = '002';
+    Job = 'Web Developer'
+}
+$employee1["Username"] = "mhopper001"
+$employee2["Username"] = "jwilliams002"
+$employee1["Job"] = "Software Lead"
+$employee3 = @{
+    First = "Alex";
+    Last = "Morgan";
+    Id = "003";
+    Job = "Software Developer"
+}
+$employee1["Status"] = "Managment"
+$employee2["Status"] = "Intermediate"
+$employee3["Status"] = "Entry Level"
+
+------------------------------------------------------------------------------------------------------------------
+
+Reverse Array: Example/Practice
+
+$array = (get-random -Minimum -10 -maximum 0)..(get-random -Minimum 1 -maximum 20)
+[array]::reverse($array)
+[array]::reverse($array)
+$reverse = ($array | sort -descending)
+
+-----------------------------------------------------------------------------------------------------------------
+
+Custom Objects: Example/Practice
+
+$compinfo = get-wmiobject win32_computersystem
+$osinfo = Get-WmiObject win32_operatingsystem
+$biosinfo = Get-WmiObject win32_bios
+$diskinfo = Get-WmiObject win32_logicaldisk
+
+$myobj = New-Object psobject
+
+$myobj | add-member -MemberType NoteProperty -name ComputerName -value $compinfo.name
+$myobj | add-member -MemberType NoteProperty -name OperatingSystem -value $osinfo.caption
+$myobj | add-member -MemberType NoteProperty -name Version -value $osinfo.version
+$myobj | add-member -MemberType NoteProperty -name Manufacturer -value $biosinfo.manufacturer
+$myobj | add-member -MemberType NoteProperty -name Disk -value $diskinfo._path
+
+----------------------------------------------------------------------------------------------------------------
+
+IDK:
+
+new-psdrive -name HKU -PSProvider Registry -Root HKEY_USERS
+New-PSDrive -Name Z -PSProvider FileSystem -Root \\live.systeminternals.com\tools
+Start-Service -Name WebClient
+
+------------------------------------------------------------------------------------------------------------------
+
+Comparison Operators:
+
+-eq
+-ne
+-lt
+-le
+-gt
+-ge
+-like
+-notlike
+-match
+-notmatch
+
+------------------------------------------------------------------------------------------------------------------
+
+If Statements:
+
+$x = 11
+if($x -gt 10) {"$x is larger than 10"}
+
+$x = 8
+if ($x if -le 9)
+{
+  write-host "$x is less than or equal to 9" -Foregroundcolor Grey
+}
+
+if("abc" -eq "abc")
+{
+  write-host "example 1 -condition staisfied" -foregroundcolor green
+}
+else
+{
+  write-host "exaple 1 - condition NOT satisfied" -foregroundcolor red
+}
+
+------------------------------------------------------------------------------------------------------------------
+
+Loops:
+
+$nums = 1,2,3,4,5
+$nums = | foreach-object{$_ * 2}
+
+$list = 'a', 'b', 'c'
+$list | foreach {$_.toupper()}
+
+$num = 0
+while ($num -lt 3)
+{
+  $num
+  $num++
+}
+$num = 0
+do {
+  $num
+  $num ++
+}while ($num -lt 3)
+
+$num = 0
+do {
+  $num
+  $num++
+}until ($num -gt 3)
+
+for($num = 1; $num -le 3; $num++){$num}
+
+for($i = 0; $i - le 255; $i++){write-host 192.168.0.$i}
+
+-------------------------------------------------------------------------------------------------------------------
+
+Read/Write file
+
+set-content -path .\example.txt -value "A string" **writes to file**
+get-content .\example.txt  **reads a file**
+
+"a new string" > .\example.txt 
+"a new line of string" >> .\example.txt
+add-content -path .\example.txt -value "another new line"
+
+------------------------------------------------------------------------------------------------------------------
+
+script
+
+'"Odoyle Rules"' > Odoyle-script.ps1
+.\Odoyle-script.ps1
+
+---------------------------------peer strings??
+@'
+"Odoyle Rules"
+"more code"
+get-service
+get-childitem
+'@ > another-script.ps1
+.\another-script.ps1
+
+-----------------------------------------------------------------------------------------------------------------
