@@ -115,7 +115,7 @@ $employee2 = [ordered]@{
     Id = '002';
     Job = 'Web Developer'
 }
-$employee1["Username"] = "mhopper001"
+$employee1["Username"] = "mhopper001" **OR $employee2.Add("Username", $employee2.First[0]+$employee2.Last+$employee2.id)**
 $employee2["Username"] = "jwilliams002"
 $employee1["Job"] = "Software Lead"
 $employee3 = [ordered]@{
