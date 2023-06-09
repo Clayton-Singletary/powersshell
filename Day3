@@ -63,4 +63,87 @@ function net-info {
     Write-Host "Gateway: $gatecon"
  }
      
------------------------------------------------------------------------------------------------------------------pa
+-----------------------------------------------------------------------------------------------------------------
+
+Other Exercises:
+
+function net-info {
+    $ipcon = ((ipconfig | findstr [0-9].\.)[0]).Split()[-1]
+    $maskcon = ((ipconfig | findstr [0-9].\.)[1]).Split()[-1]
+    $gatecon = ((ipconfig | findstr [0-9].\.)[2]).Split()[-1]
+
+    Write-Host "IP: $ipcon"
+    Write-Host "Subnet: $maskcon"
+    Write-Host "Gateway: $gatecon"
+}
+#-------------------------------------------------------------
+
+function Get-OrdinalDate {
+    Get-Date -UFormat "%Y-%j"
+}
+
+function Get-SquareNum {
+    param(
+        [parameter(mandatory = $true)]
+        [int]$num
+        )
+    $num * $num
+}
+
+function Get-Product {
+    param(
+        [parameter(mandatory = $true)]
+        [int]$num1,
+        [parameter(mandatory = $true)]
+        [int]$num2,
+        [parameter(mandatory = $true)]
+        [int]$num3
+    )
+    $num1 * $num2 * $num3
+}
+
+#-------------------------------------------------------------
+
+function pythag {
+    param(
+        [parameter(mandatory = $true)]
+        [int]$a,
+        [parameter(mandatory = $true)]
+        [int]$b
+    )
+    $c = ($a*$a + $b*$b)
+    [math]::sqrt($c)
+}
+
+function tri-angles {
+    param(
+        [parameter(mandatory = $true)]
+        [int]$a,
+        [parameter(mandatory = $true)]
+        [int]$b
+    )
+    $c = 180 - ($a + $b)
+    $c
+}
+
+function human {
+    param(
+        [parameter(mandatory = $true)]
+        [string]$First,
+        [parameter(mandatory = $true)]
+        [string]$Last,
+        [parameter(mandatory = $true)]
+        [int]$Age,
+        [parameter(mandatory = $true)]
+        [int]$Weight
+    )
+    $Weight = $Weight / 2.2
+
+    $humint = [ordered]@{
+        First = $first;
+        Last = $last;
+        Age = $age;
+        Weight_kg = $Weight
+    }
+    $humint
+}
