@@ -1,0 +1,66 @@
+input > "Text `"Quotation marks`"" OR 'Text "Quotation marks"
+output > Text "Quotation marks"
+
+`n = newline
+
+"{0:d5}" -f 1234
+> 01234
+"{0:n3}" -f 123.45678
+> 123.457
+
+'server1' -replace '[,]', '[;]' **replaces comas with simicollons**
+
+$profile -split '\.' **splits on periods**
+-csplit **casesensitive**
+"cat", "dog" -join
+> catdog
+
+----------------------------------------------------------------------------------------------------------------
+
+Functions:
+
+function test-it {
+    'Hello World!'
+}
+
+function add-twonum {
+    param ([int]$a, [int]$b)
+    $a + $b
+}
+
+function test-me{
+    param(
+        [parameter(mandatory=$true)]
+        $var
+        )
+        "your name is $var"
+}
+
+function convert-todollars {
+    param(
+        [parameter(mandatory, HelpMessage='Enter number of Euros.')]
+        [double]
+        $euro
+    )
+    $Dollar = $euro * 1.4
+    Write-host "`$$Dollar U.S. Dollars"
+}
+
+# **comments**
+<# **multi-line comment** #>
+
+------------------------------------------------------------------------------------------------------------------
+
+regex exercise:
+
+function net-info {
+    $ipcon = ((ipconfig | findstr [0-9].\.)[0]).Split()[-1]
+    $maskcon = ((ipconfig | findstr [0-9].\.)[1]).Split()[-1]
+    $gatecon = ((ipconfig | findstr [0-9].\.)[2]).Split()[-1]
+
+    Write-Host "IP: $ipcon"
+    Write-Host "Subnet: $maskcon"
+    Write-Host "Gateway: $gatecon"
+ }
+     
+-----------------------------------------------------------------------------------------------------------------pa
