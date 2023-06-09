@@ -104,12 +104,12 @@ $soldier
 
 Hash Tables: Examples/Practice
 
-$employee1 = @{
+$employee1 = [ordered]@{
     First = 'Mary'; 
     Last = 'Hopper'; 
     Id = '001';
     Job = 'Software Developer'}
-$employee2 = @{
+$employee2 = [ordered]@{
     First = 'John';
     Last = 'Williams';
     Id = '002';
@@ -118,7 +118,7 @@ $employee2 = @{
 $employee1["Username"] = "mhopper001"
 $employee2["Username"] = "jwilliams002"
 $employee1["Job"] = "Software Lead"
-$employee3 = @{
+$employee3 = [ordered]@{
     First = "Alex";
     Last = "Morgan";
     Id = "003";
