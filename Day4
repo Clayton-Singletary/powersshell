@@ -12,10 +12,8 @@ function q2($arr,$rows,$cols,$key) {
         if($row[0] -eq $key){
             return $row[9]
         }
-        else{
-            return -1
-        }
     }
+    return -1
 }
 
 function q3 {
